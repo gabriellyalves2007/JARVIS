@@ -1,46 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "qual éo meu nome?",
-            "resposta": "Seu nome é Gabrielly."
-        },
-        {
-            "pergunta": "repete",
-            "resposta": "Seu nome é Gabrielly."
-        },
-        {
-            "pergunta": "abra o google",
-            "resposta": "Claro. Abrindo o Google."
-        },
-        {
-            "pergunta": "bom dia Jarvis!",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "que horas são",
-            "resposta": "Neste momento são 13:16."
-        },
-        {
-            "pergunta": "abra o google",
-            "resposta": "Claro. Abrindo o Google."
-        },
-        {
-            "pergunta": "é o meu nome",
-            "resposta": "Meu Nome é Gal é um filme brasileiro de drama que conta sobre a fase de vida da cantora brasileira Gal Costa, quando com 20 anos vai para o Rio de Janeiro, onde inicia sua vida de artista.\n\n\n== Enredo ==\nMaria da Graça Costa Penna Burgos é uma moça de apenas 20 anos que resolve deixar a Bahia rumo à cidade de Rio de Janeiro, por coincidência encontra seus amigos conterrâneos artistas Caetano Veloso, Maria Bethânia, Gilberto Gil e Dedé Gadelha, que dão auxílio para se tornar uma cantora da música popular brasileira. Muito tímida, acaba tendo dificuldades em se soltar, mas com ajuda maior de dois dos amigos vence a timidez e juntos fundam o movimento musical conhecido como Tropicália; porém, dois de seus amigos faz algo que desagrada a ditadura militar brasileira e são exilados."
-        },
-        {
-            "pergunta": "qual o meu nome?",
-            "resposta": "Você se chama Gabrielly."
-        },
-        {
-            "pergunta": "repete",
-            "resposta": "Você se chama Gabrielly."
-        },
-        {
-            "pergunta": "abra o google e abra o youtube",
-            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
-        },
-        {
             "pergunta": "repete",
             "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
         },
@@ -118,6 +78,46 @@
         },
         {
             "pergunta": "abri a calculadoura",
+            "resposta": "Abrindo a calculadora."
+        },
+        {
+            "pergunta": "abre o gogle\npesquize python\nabra a calcudora",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abre o gogle, \npesquize python, \nabra a calcudora",
+            "resposta": "Não encontrei informações sobre isso.\nNão encontrei informações sobre isso.\nNão encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abre o gogle",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abre o gogle",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "pesquize python",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abra a calcudora",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abre o gogle",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abre o gogle",
+            "resposta": "Pode deixar. Abrindo o Google agora."
+        },
+        {
+            "pergunta": "pesquize python",
+            "resposta": "Pesquisando por 'python' no Google."
+        },
+        {
+            "pergunta": "abra a calcudora",
             "resposta": "Abrindo a calculadora."
         }
     ],

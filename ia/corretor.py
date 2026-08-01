@@ -1,15 +1,18 @@
 import re
 import unicodedata
+from difflib import get_close_matches
 
 
 class CorretorTexto:
     """
-    Corrige erros comuns de digitação e de reconhecimento de voz
-    antes que o comando seja interpretado pelo JARVIS.
+    Corrige erros comuns de digitação e reconhecimento de voz.
+
+    Primeiro usa correções exatas.
+    Depois tenta encontrar palavras parecidas.
     """
 
     def __init__(self):
-        self.correcoes = {
+        self.correcoes_exatas = {
             # Ações
             "abri": "abra",
             "abririr": "abrir",
@@ -32,6 +35,34 @@ class CorretorTexto:
             "horarrio": "horario",
         }
 
+        self.palavras_conhecidas = (
+            "abra",
+            "abrir",
+            "abre",
+            "acesse",
+            "acessar",
+            "entre",
+            "entrar",
+            "inicie",
+            "iniciar",
+            "execute",
+            "executar",
+            "pesquise",
+            "pesquisar",
+            "procure",
+            "buscar",
+            "busque",
+            "google",
+            "youtube",
+            "calculadora",
+            "horario",
+            "hora",
+            "horas",
+            "nome",
+            "repita",
+            "novamente",
+        )
+
     @staticmethod
     def remover_acentos(texto: str) -> str:
         texto_normalizado = unicodedata.normalize(
@@ -45,13 +76,45 @@ class CorretorTexto:
             if unicodedata.category(caractere) != "Mn"
         )
 
+    def corrigir_palavra(self, palavra: str) -> str:
+        palavra_normalizada = self.remover_acentos(
+            palavra.lower()
+        )
+
+        # Correção manual primeiro.
+        if palavra_normalizada in self.correcoes_exatas:
+            return self.correcoes_exatas[
+                palavra_normalizada
+            ]
+
+        # Se já for conhecida, mantém.
+        if palavra_normalizada in self.palavras_conhecidas:
+            return palavra
+
+        # Ignora palavras muito curtas para evitar
+        # correções erradas como "e", "o", "a".
+        if len(palavra_normalizada) < 4:
+            return palavra
+
+        correspondencias = get_close_matches(
+            palavra_normalizada,
+            self.palavras_conhecidas,
+            n=1,
+            cutoff=0.72
+        )
+
+        if correspondencias:
+            return correspondencias[0]
+
+        return palavra
+
     def corrigir(self, texto: str) -> str:
         texto = str(texto).strip()
 
         if not texto:
             return ""
 
-        palavras = re.findall(
+        partes = re.findall(
             r"\w+|[^\w\s]",
             texto,
             flags=re.UNICODE
@@ -59,21 +122,14 @@ class CorretorTexto:
 
         resultado = []
 
-        for palavra in palavras:
-            palavra_comparacao = self.remover_acentos(
-                palavra.lower()
-            )
+        for parte in partes:
+            if re.fullmatch(r"\w+", parte):
+                parte = self.corrigir_palavra(parte)
 
-            palavra_corrigida = self.correcoes.get(
-                palavra_comparacao,
-                palavra
-            )
-
-            resultado.append(palavra_corrigida)
+            resultado.append(parte)
 
         texto_corrigido = " ".join(resultado)
 
-        # Remove espaços antes de pontuação.
         texto_corrigido = re.sub(
             r"\s+([,.!?;:])",
             r"\1",
