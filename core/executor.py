@@ -1,5 +1,6 @@
 from core.contexto import contexto
 from core.intencoes import Intencao
+from core.tarefas import gerenciador_tarefas
 
 from habilidades.registro import registro
 
@@ -9,7 +10,7 @@ def executar_intencao(
     comando: str
 ) -> str:
     """
-    Executa uma única intenção usando
+    Executa uma única intenção utilizando
     o registro de habilidades.
     """
 
@@ -17,9 +18,14 @@ def executar_intencao(
         if contexto.ultima_resposta:
             return contexto.ultima_resposta
 
-        return "Ainda não tenho nenhuma resposta para repetir."
+        return (
+            "Ainda não tenho nenhuma resposta "
+            "para repetir."
+        )
 
-    habilidade = registro.obter(intencao)
+    habilidade = registro.obter(
+        intencao
+    )
 
     if habilidade is None:
         return (
@@ -27,50 +33,102 @@ def executar_intencao(
             "para essa intenção."
         )
 
-    resposta = habilidade.executar(comando)
+    resposta = habilidade.executar(
+        comando
+    )
 
     if resposta is None:
-        return "A ação foi executada sem uma resposta."
+        return (
+            "A ação foi executada sem uma resposta."
+        )
 
     return str(resposta).strip()
 
 
-def executar_plano(plano: dict) -> str:
+def executar_plano(
+    plano: dict
+) -> str:
     """
     Executa todas as etapas do plano em ordem.
 
-    Se ocorrer uma falha real durante uma etapa,
-    interrompe as próximas ações para evitar
-    uma execução inconsistente.
+    O Gerenciador de Tarefas acompanha o progresso.
+    Se uma etapa falhar, as próximas ações são
+    interrompidas.
     """
 
-    etapas = plano.get("etapas", [])
+    etapas = plano.get(
+        "etapas",
+        []
+    )
 
     if not etapas:
-        return "Não encontrei nenhuma ação para executar."
+        return (
+            "Não encontrei nenhuma ação "
+            "para executar."
+        )
+
+    gerenciador_tarefas.iniciar(
+        plano
+    )
 
     respostas = []
 
     for etapa in etapas:
-        numero = etapa.get("numero", "?")
-        intencao = etapa.get("intencao")
-        comando = etapa.get("comando", "")
+        numero = etapa.get(
+            "numero",
+            "?"
+        )
+
+        intencao = etapa.get(
+            "intencao"
+        )
+
+        comando = etapa.get(
+            "comando",
+            ""
+        )
 
         etapa["executado"] = False
         etapa["resposta"] = ""
         etapa["erro"] = ""
 
+        if gerenciador_tarefas.foi_cancelada():
+            mensagem = (
+                "A tarefa foi cancelada. "
+                "As próximas ações não serão executadas."
+            )
+
+            respostas.append(
+                mensagem
+            )
+
+            print(
+                "⛔ Execução cancelada."
+            )
+
+            break
+
         if intencao is None:
             mensagem = (
-                f"Não consegui identificar a etapa {numero}. "
+                f"Não consegui identificar "
+                f"a etapa {numero}. "
                 "As próximas ações foram canceladas."
             )
 
             etapa["erro"] = mensagem
-            respostas.append(mensagem)
+
+            if isinstance(numero, int):
+                gerenciador_tarefas.marcar_erro(
+                    numero=numero,
+                    mensagem=mensagem
+                )
+
+            respostas.append(
+                mensagem
+            )
 
             print(
-                f"❌ Etapa {numero} sem intenção identificada."
+                f"❌ Etapa {numero} sem intenção."
             )
 
             break
@@ -86,36 +144,68 @@ def executar_plano(plano: dict) -> str:
                 comando=comando
             )
 
-            resposta = str(resposta).strip()
+            resposta = str(
+                resposta
+            ).strip()
 
             etapa["resposta"] = resposta
             etapa["executado"] = True
 
+            if isinstance(numero, int):
+                gerenciador_tarefas.marcar_concluida(
+                    numero=numero,
+                    resposta=resposta
+                )
+
             if resposta:
-                respostas.append(resposta)
+                respostas.append(
+                    resposta
+                )
 
             print(
                 f"✅ Etapa {numero} concluída."
             )
 
+            print(
+                "📊 "
+                f"{gerenciador_tarefas.obter_progresso()}"
+            )
+
         except Exception as erro:
             mensagem = (
-                f"Não consegui executar a etapa {numero}. "
+                f"Não consegui executar "
+                f"a etapa {numero}. "
                 "As próximas ações foram canceladas."
             )
 
-            etapa["erro"] = str(erro)
-            etapa["executado"] = False
-
-            print(
-                f"❌ Erro na etapa {numero}: {erro}"
+            etapa["erro"] = str(
+                erro
             )
 
-            respostas.append(mensagem)
+            etapa["executado"] = False
+
+            if isinstance(numero, int):
+                gerenciador_tarefas.marcar_erro(
+                    numero=numero,
+                    mensagem=str(erro)
+                )
+
+            print(
+                f"❌ Erro na etapa {numero}: "
+                f"{erro}"
+            )
+
+            respostas.append(
+                mensagem
+            )
 
             break
 
     if not respostas:
-        return "Não consegui executar o plano."
+        return (
+            "Não consegui executar o plano."
+        )
 
-    return "\n".join(respostas)
+    return "\n".join(
+        respostas
+    )

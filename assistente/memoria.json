@@ -1,58 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abre o gogle",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "pesquize python",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "abra a calcudora",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "abre o gogle",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "abre o gogle",
-            "resposta": "Pode deixar. Abrindo o Google agora."
-        },
-        {
-            "pergunta": "pesquize python",
-            "resposta": "Pesquisando por 'python' no Google."
-        },
-        {
-            "pergunta": "abra a calcudora",
-            "resposta": "Abrindo a calculadora."
-        },
-        {
-            "pergunta": "zezé de camargo",
-            "resposta": "Mirosmar José de Camargo (Pirenópolis, 17 de agosto de 1962), mais conhecido pelo nome artístico Zezé Di Camargo, é um cantor e compositor brasileiro. Integra juntamente com seu irmão, Luciano Camargo, a dupla sertaneja Zezé Di Camargo & Luciano, que vendeu mais de 30 milhões de discos. Zezé é considerado um ícone sertanejo, responsável pela ascensão do gênero nas décadas de 1990 e 2000 com composições e interpretações relevantes, sendo uma delas, \"É o Amor\", considerada o maior sucesso da dupla."
-        },
-        {
-            "pergunta": "abra o youtube",
-            "resposta": "Tudo pronto. YouTube iniciado."
-        },
-        {
-            "pergunta": "abra o google e pesquise zezé de camargo",
-            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'zezé de camargo' no Google."
-        },
-        {
-            "pergunta": "abra o youtube e toque uma playlist da gravadora novo tempo",
-            "resposta": "Tudo pronto. YouTube iniciado.\nPriscilla Novaes Leone, mais conhecida como Pitty (Salvador, 7 de outubro de 1977), é uma cantora, compositora e musicista brasileira. Como cantora desde os 17 anos de idade, Pitty iniciou sua carreira profissionalmente em 1997, atuando como baterista durante dois anos na banda de punk rock Shes; apesar de realizarem alguns shows, a banda não chegou a gravar nenhum álbum. Em 1998, integra a banda de hardcore punk Inkoma, dessa vez atuando como vocalista, onde gravou um álbum de estúdio, tornando-se bastante popular na cena underground da Bahia."
-        },
-        {
-            "pergunta": "abra o youtube e toque a musica intensamente adoradores 5",
-            "resposta": "Abrindo o YouTube.\nNão encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "abra o Google",
-            "resposta": "Tudo certo. Abrindo o Google."
-        },
-        {
             "pergunta": "pesquise Python",
             "resposta": "Pesquisando por 'Python' no Google."
         },
@@ -119,6 +67,58 @@
         {
             "pergunta": "explique a tecnologia imaginária ultranexo quântico 9000",
             "resposta": "Ainda não encontrei uma resposta confiável para 'a tecnologia imaginária ultranexo quântico 9000'. Minha inteligência artificial ainda não foi integrada."
+        },
+        {
+            "pergunta": "que horas são?",
+            "resposta": "São exatamente 14:53."
+        },
+        {
+            "pergunta": "abra o Google",
+            "resposta": "Pode deixar. Abrindo o Google agora."
+        },
+        {
+            "pergunta": "abra o YouTube",
+            "resposta": "Abrindo o YouTube."
+        },
+        {
+            "pergunta": "abra a calculadora",
+            "resposta": "Calculadora iniciada."
+        },
+        {
+            "pergunta": "abra o Google e pesquise Python",
+            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'Python' no Google."
+        },
+        {
+            "pergunta": "meu nome é Gabrielly",
+            "resposta": "Prazer em conhecer você. Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "qual é meu nome?",
+            "resposta": "Claro. Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "quem foi Albert Einstein?",
+            "resposta": "Albert Einstein (Ulm, 14 de março de 1879 – Princeton, 18 de abril de 1955) foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica.\nNascido em uma família de judeus alemães, mudou-se para a Suíça ainda jovem e iniciou seus estudos na Escola Politécnica de Zurique."
+        },
+        {
+            "pergunta": "pesquise Albert Einstein",
+            "resposta": "Pesquisando por 'Albert Einstein' no Google."
+        },
+        {
+            "pergunta": "abri o gugou",
+            "resposta": "Google sendo iniciado."
+        },
+        {
+            "pergunta": "pesquize python",
+            "resposta": "Pesquisando por 'python' no Google."
+        },
+        {
+            "pergunta": "abra a calcudora",
+            "resposta": "Tudo certo. Calculadora aberta."
+        },
+        {
+            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
+            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
         }
     ],
     "nome": "Gabrielly"
