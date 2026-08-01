@@ -74,6 +74,7 @@ class Router:
             Intencao.ABRIR_GOOGLE,
             Intencao.ABRIR_YOUTUBE,
             Intencao.ABRIR_CALCULADORA,
+            Intencao.ABRIR_PROGRAMA,
             Intencao.INFORMAR_HORAS,
             Intencao.SALVAR_NOME,
             Intencao.LEMBRAR_NOME,

@@ -1,34 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abra o Google e pesquise inteligência artificial",
-            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'inteligência artificial' no Google."
-        },
-        {
-            "pergunta": "qual é meu nome?",
-            "resposta": "Você se chama Gabrielly."
-        },
-        {
-            "pergunta": "repete",
-            "resposta": "Você se chama Gabrielly."
-        },
-        {
-            "pergunta": "quem foi Albert Einstein?",
-            "resposta": "Albert Einstein (Ulm, 14 de março de 1879 – Princeton, 18 de abril de 1955) foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica.\nNascido em uma família de judeus alemães, mudou-se para a Suíça ainda jovem e iniciou seus estudos na Escola Politécnica de Zurique."
-        },
-        {
-            "pergunta": "o que é Python?",
-            "resposta": "Python é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
-            "pergunta": "explique computação quântica",
-            "resposta": "Um computador quântico é um computador real ou teórico que explora fenômenos quânticos como sobreposição e entrelaçamento de maneira essencial. Acredita-se amplamente que um computador quântico poderia realizar alguns cálculos exponencialmente mais rápido do que qualquer computador clássico. Por exemplo, um computador quântico de grande escala poderia quebrar alguns esquemas de encriptação amplamente utilizados e ajudar físicos na realização de simulações físicas."
-        },
-        {
-            "pergunta": "abra o Google",
-            "resposta": "Tudo certo. Abrindo o Google."
-        },
-        {
             "pergunta": "que horas são?",
             "resposta": "O relógio marca 14:40."
         },
@@ -119,6 +91,34 @@
         {
             "pergunta": "cancele a tarefa",
             "resposta": "A última tarefa já foi concluída."
+        },
+        {
+            "pergunta": "abra o VS Code",
+            "resposta": "Abrindo VS Code."
+        },
+        {
+            "pergunta": "abra o Spotify",
+            "resposta": "Abrindo Spotify."
+        },
+        {
+            "pergunta": "abra o Word",
+            "resposta": "Abrindo Microsoft Word."
+        },
+        {
+            "pergunta": "abra o Excel",
+            "resposta": "Abrindo Microsoft Excel."
+        },
+        {
+            "pergunta": "abra o Chrome",
+            "resposta": "Abrindo Google Chrome."
+        },
+        {
+            "pergunta": "abra o bloco de notas",
+            "resposta": "Abrindo Bloco de Notas."
+        },
+        {
+            "pergunta": "abra o VS Code e abra o Spotify",
+            "resposta": "Abrindo VS Code.\nAbrindo Spotify."
         }
     ],
     "nome": "Gabrielly"

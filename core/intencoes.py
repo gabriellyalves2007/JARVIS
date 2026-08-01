@@ -1,12 +1,14 @@
 from enum import Enum, auto
 
 from ia.interpretador import interpretador
+from servicos.programas import programas
 
 
 class Intencao(Enum):
     ABRIR_GOOGLE = auto()
     ABRIR_YOUTUBE = auto()
     ABRIR_CALCULADORA = auto()
+    ABRIR_PROGRAMA = auto()
 
     INFORMAR_HORAS = auto()
 
@@ -142,8 +144,6 @@ def identificar_intencao(
     ):
         return Intencao.SALVAR_NOME
 
-    # Cancelamento precisa ser reconhecido
-    # antes da consulta de progresso.
     if contem_alguma(
         texto,
         palavras_cancelar_tarefa
@@ -243,6 +243,8 @@ def identificar_intencao(
     ):
         return Intencao.INFORMAR_HORAS
 
+    # Sites já existentes continuam com suas
+    # intenções específicas.
     if "google" in texto:
         return Intencao.ABRIR_GOOGLE
 
@@ -251,6 +253,16 @@ def identificar_intencao(
 
     if "calculadora" in texto:
         return Intencao.ABRIR_CALCULADORA
+
+    # Programa genérico.
+    if (
+        contem_alguma(
+            texto,
+            palavras_abrir
+        )
+        and programas.existe(texto)
+    ):
+        return Intencao.ABRIR_PROGRAMA
 
     if contem_alguma(
         texto,

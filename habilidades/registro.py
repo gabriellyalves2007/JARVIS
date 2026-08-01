@@ -5,6 +5,7 @@ from habilidades.google import google
 from habilidades.horario import horario
 from habilidades.memoria import Memoria
 from habilidades.pesquisa import pesquisa
+from habilidades.programa import programa
 from habilidades.tarefa import HabilidadeTarefa
 from habilidades.youtube import youtube
 
@@ -34,6 +35,11 @@ class RegistroHabilidades:
         self.registrar(
             Intencao.ABRIR_CALCULADORA,
             calculadora
+        )
+
+        self.registrar(
+            Intencao.ABRIR_PROGRAMA,
+            programa
         )
 
         self.registrar(
