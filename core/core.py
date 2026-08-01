@@ -4,45 +4,85 @@ from core.contexto import contexto
 from core.executor import executar_intencao
 from core.intencoes import identificar_intencao
 
+from ia.planejador import planejador
+from ia.resolvedor import resolvedor
+
 
 def processar_entrada(texto: str) -> str:
     """
-    Identifica a intenção do usuário, executa a ação correspondente,
-    atualiza o contexto da conversa e salva o histórico.
+    Fluxo principal do JARVIS:
+
+    1. recebe o texto;
+    2. resolve referências ao contexto;
+    3. identifica a intenção;
+    4. cria um plano;
+    5. executa o plano;
+    6. registra a conversa no contexto e no histórico.
     """
 
-    texto = texto.strip()
+    texto_original = str(texto).strip()
 
-    if not texto:
+    if not texto_original:
         return "Digite um comando para eu processar."
 
     print("\n========== JARVIS ==========")
 
     try:
-        print(f"👤 Entrada: {texto}")
+        print(f"👤 Entrada: {texto_original}")
 
-        intencao = identificar_intencao(texto)
+        # Completa comandos que dependem da conversa anterior.
+        comando_resolvido = resolvedor.resolver(
+            texto_original
+        )
+
+        if comando_resolvido != texto_original:
+            print(
+                "🔗 Comando resolvido: "
+                f"{comando_resolvido}"
+            )
+
+        # O intencoes.py já utiliza o interpretador
+        # para normalizar e analisar o texto.
+        intencao = identificar_intencao(
+            comando_resolvido
+        )
 
         print(f"🧠 Intenção: {intencao.name}")
 
+        plano = planejador.criar_plano(
+            intencao=intencao,
+            comando=comando_resolvido
+        )
+
+        print(
+            f"📋 Etapas do plano: "
+            f"{len(plano['etapas'])}"
+        )
+
         resposta = executar_intencao(
-            intencao,
-            texto
+            plano["intencao"],
+            plano["comando"]
         )
 
         if not resposta:
-            resposta = "Não consegui processar esse comando."
+            resposta = (
+                "Não consegui processar esse comando."
+            )
 
-        contexto.atualizar(
-            intencao=intencao,
-            comando=texto,
-            resposta=resposta
+        resposta = str(resposta).strip()
+
+        # Guarda a interação na memória temporária.
+        contexto.adicionar(
+            pergunta=texto_original,
+            resposta=resposta,
+            intencao=intencao
         )
 
         print(f"🤖 Resposta: {resposta}")
 
+        # Guarda a conversa na memória permanente.
         salvar_conversa(
-            texto,
+            texto_original,
             resposta
         )
 
@@ -53,9 +93,13 @@ def processar_entrada(texto: str) -> str:
 
     except Exception as erro:
         print(
-            f"❌ Erro ao processar entrada: {erro}"
+            "❌ Erro ao processar entrada: "
+            f"{erro}"
         )
 
         print("============================\n")
 
-        return "Ocorreu um erro ao processar o comando."
+        return (
+            "Ocorreu um erro ao processar "
+            "o comando."
+        )

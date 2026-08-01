@@ -1,30 +1,54 @@
-from datetime import datetime
+from dataclasses import dataclass, field
+from typing import Optional
 
 
-class ContextoConversa:
+@dataclass
+class Contexto:
+    """
+    Mantém o estado da conversa do JARVIS.
+    """
 
-    def __init__(self):
-        self.limpar()
+    ultima_pergunta: str = ""
+    ultima_resposta: str = ""
+    ultima_intencao: Optional[object] = None
 
-    def atualizar(
+    historico: list = field(default_factory=list)
+
+    limite_historico: int = 10
+
+    def adicionar(
         self,
-        intencao,
-        comando: str,
-        resposta: str
+        pergunta: str,
+        resposta: str,
+        intencao=None
     ):
-        self.ultima_intencao = intencao
-        self.ultimo_comando = comando
+        """
+        Adiciona uma nova interação ao contexto.
+        """
+
+        self.ultima_pergunta = pergunta
         self.ultima_resposta = resposta
-        self.ultimo_horario = datetime.now()
+        self.ultima_intencao = intencao
+
+        self.historico.append(
+            {
+                "pergunta": pergunta,
+                "resposta": resposta,
+                "intencao": intencao,
+            }
+        )
+
+        if len(self.historico) > self.limite_historico:
+            self.historico.pop(0)
+
+    def obter_historico(self):
+        return self.historico.copy()
 
     def limpar(self):
-        self.ultima_intencao = None
-        self.ultimo_comando = ""
+        self.ultima_pergunta = ""
         self.ultima_resposta = ""
-        self.ultimo_horario = None
-
-    def existe_contexto(self) -> bool:
-        return self.ultima_intencao is not None
+        self.ultima_intencao = None
+        self.historico.clear()
 
 
-contexto = ContextoConversa()
+contexto = Contexto()
