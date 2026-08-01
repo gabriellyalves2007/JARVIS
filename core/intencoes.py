@@ -15,6 +15,8 @@ class Intencao(Enum):
 
     REPETIR = auto()
 
+    CONSULTAR_TAREFA = auto()
+
     PESQUISAR = auto()
 
 
@@ -28,12 +30,16 @@ def contem_alguma(
     )
 
 
-def identificar_intencao(comando: str) -> Intencao:
+def identificar_intencao(
+    comando: str
+) -> Intencao:
     """
     Identifica a intenção principal do usuário.
     """
 
-    texto = interpretador.interpretar(comando)
+    texto = interpretador.interpretar(
+        comando
+    )
 
     if not texto:
         return Intencao.PESQUISAR
@@ -98,19 +104,79 @@ def identificar_intencao(comando: str) -> Intencao:
         "fala novamente",
     )
 
+    palavras_consultar_tarefa = (
+        "qual o progresso",
+        "qual e o progresso",
+        "qual e o andamento",
+        "qual o andamento",
+        "como esta a tarefa",
+        "como esta o progresso",
+        "andamento da tarefa",
+        "progresso da tarefa",
+        "progresso atual",
+        "qual tarefa esta executando",
+        "qual tarefa voce esta executando",
+        "o que esta executando",
+        "o que voce esta executando",
+        "status da tarefa",
+        "estado da tarefa",
+        "a tarefa terminou",
+        "a tarefa foi concluida",
+    )
+
     # Salvar nome
-    if contem_alguma(texto, palavras_salvar_nome):
+    if contem_alguma(
+        texto,
+        palavras_salvar_nome
+    ):
         return Intencao.SALVAR_NOME
 
-    # Repetir última resposta
-    if contem_alguma(texto, palavras_repetir):
+    # Consultar tarefa precisa vir antes da pesquisa.
+    if contem_alguma(
+        texto,
+        palavras_consultar_tarefa
+    ):
+        return Intencao.CONSULTAR_TAREFA
+
+    # Regra adicional para variações sobre tarefa.
+    if (
+        contem_alguma(
+            texto,
+            (
+                "tarefa",
+                "progresso",
+                "andamento",
+            )
+        )
+        and contem_alguma(
+            texto,
+            (
+                "qual",
+                "como",
+                "status",
+                "estado",
+                "terminou",
+                "concluida",
+                "executando",
+            )
+        )
+    ):
+        return Intencao.CONSULTAR_TAREFA
+
+    # Repetir resposta
+    if contem_alguma(
+        texto,
+        palavras_repetir
+    ):
         return Intencao.REPETIR
 
     # Perguntar nome
-    if contem_alguma(texto, palavras_perguntar_nome):
+    if contem_alguma(
+        texto,
+        palavras_perguntar_nome
+    ):
         return Intencao.LEMBRAR_NOME
 
-    # Regra extra para lembrar o nome
     if (
         "nome" in texto
         and contem_alguma(
@@ -135,7 +201,10 @@ def identificar_intencao(comando: str) -> Intencao:
         return Intencao.LEMBRAR_NOME
 
     # Horário
-    if contem_alguma(texto, palavras_horario):
+    if contem_alguma(
+        texto,
+        palavras_horario
+    ):
         return Intencao.INFORMAR_HORAS
 
     if (
@@ -160,21 +229,20 @@ def identificar_intencao(comando: str) -> Intencao:
     ):
         return Intencao.INFORMAR_HORAS
 
-    # Abrir Google
+    # Aplicações
     if "google" in texto:
         return Intencao.ABRIR_GOOGLE
 
-    # Abrir YouTube
     if "youtube" in texto:
         return Intencao.ABRIR_YOUTUBE
 
-    # Abrir Calculadora
     if "calculadora" in texto:
         return Intencao.ABRIR_CALCULADORA
 
-    # Abertura genérica
-    if contem_alguma(texto, palavras_abrir):
-
+    if contem_alguma(
+        texto,
+        palavras_abrir
+    ):
         if "navegador" in texto:
             return Intencao.ABRIR_GOOGLE
 

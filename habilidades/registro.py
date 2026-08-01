@@ -1,23 +1,26 @@
 from core.intencoes import Intencao
 
-from habilidades.google import google
-from habilidades.youtube import youtube
 from habilidades.calculadora import calculadora
+from habilidades.google import google
 from habilidades.horario import horario
 from habilidades.memoria import Memoria
 from habilidades.pesquisa import pesquisa
+from habilidades.tarefa import tarefa
+from habilidades.youtube import youtube
 
 
 class RegistroHabilidades:
+    """
+    Registra e localiza as habilidades
+    disponíveis no JARVIS.
+    """
 
     def __init__(self):
-
         self._habilidades = {}
 
         self._registrar()
 
-    def _registrar(self):
-
+    def _registrar(self) -> None:
         self.registrar(
             Intencao.ABRIR_GOOGLE,
             google
@@ -53,22 +56,42 @@ class RegistroHabilidades:
         )
 
         self.registrar(
+            Intencao.CONSULTAR_TAREFA,
+            tarefa
+        )
+
+        self.registrar(
             Intencao.PESQUISAR,
             pesquisa
         )
 
     def registrar(
         self,
-        intencao,
+        intencao: Intencao,
         habilidade
-    ):
-        self._habilidades[intencao] = habilidade
+    ) -> None:
+        self._habilidades[
+            intencao
+        ] = habilidade
 
     def obter(
         self,
-        intencao
+        intencao: Intencao
     ):
-        return self._habilidades.get(intencao)
+        return self._habilidades.get(
+            intencao
+        )
+
+    def existe(
+        self,
+        intencao: Intencao
+    ) -> bool:
+        return intencao in self._habilidades
+
+    def listar(self) -> list:
+        return list(
+            self._habilidades.keys()
+        )
 
 
 registro = RegistroHabilidades()

@@ -5,10 +5,6 @@ from ia.interpretador import interpretador
 
 
 class Destino(Enum):
-    """
-    Destinos disponíveis para o processamento.
-    """
-
     EXECUTOR = "executor"
     MEMORIA = "memoria"
     IA = "ia"
@@ -31,9 +27,10 @@ class Router:
         if intencao is None:
             return Destino.DESCONHECIDO
 
-        texto = interpretador.interpretar(comando)
+        texto = interpretador.interpretar(
+            comando
+        )
 
-        # Perguntas que procuram uma explicação.
         perguntas_conhecimento = (
             "quem e",
             "quem foi",
@@ -54,8 +51,6 @@ class Router:
         ):
             return Destino.INTERNET
 
-        # Pedidos explícitos de pesquisa continuam
-        # sendo executados pela habilidade que abre o Google.
         pesquisas_google = (
             "pesquise",
             "pesquisar",
@@ -81,6 +76,7 @@ class Router:
             Intencao.SALVAR_NOME,
             Intencao.LEMBRAR_NOME,
             Intencao.REPETIR,
+            Intencao.CONSULTAR_TAREFA,
             Intencao.PESQUISAR,
         }
 

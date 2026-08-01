@@ -49,11 +49,10 @@ def executar_plano(
     plano: dict
 ) -> str:
     """
-    Executa todas as etapas do plano em ordem.
+    Executa as etapas do plano em ordem.
 
-    O Gerenciador de Tarefas acompanha o progresso.
-    Se uma etapa falhar, as próximas ações são
-    interrompidas.
+    Consultas sobre a tarefa não substituem
+    a tarefa anteriormente registrada.
     """
 
     etapas = plano.get(
@@ -67,9 +66,16 @@ def executar_plano(
             "para executar."
         )
 
-    gerenciador_tarefas.iniciar(
-        plano
+    apenas_consulta_tarefa = (
+        len(etapas) == 1
+        and etapas[0].get("intencao")
+        == Intencao.CONSULTAR_TAREFA
     )
+
+    if not apenas_consulta_tarefa:
+        gerenciador_tarefas.iniciar(
+            plano
+        )
 
     respostas = []
 
@@ -92,7 +98,10 @@ def executar_plano(
         etapa["resposta"] = ""
         etapa["erro"] = ""
 
-        if gerenciador_tarefas.foi_cancelada():
+        if (
+            not apenas_consulta_tarefa
+            and gerenciador_tarefas.foi_cancelada()
+        ):
             mensagem = (
                 "A tarefa foi cancelada. "
                 "As próximas ações não serão executadas."
@@ -117,7 +126,10 @@ def executar_plano(
 
             etapa["erro"] = mensagem
 
-            if isinstance(numero, int):
+            if (
+                not apenas_consulta_tarefa
+                and isinstance(numero, int)
+            ):
                 gerenciador_tarefas.marcar_erro(
                     numero=numero,
                     mensagem=mensagem
@@ -151,7 +163,10 @@ def executar_plano(
             etapa["resposta"] = resposta
             etapa["executado"] = True
 
-            if isinstance(numero, int):
+            if (
+                not apenas_consulta_tarefa
+                and isinstance(numero, int)
+            ):
                 gerenciador_tarefas.marcar_concluida(
                     numero=numero,
                     resposta=resposta
@@ -166,10 +181,11 @@ def executar_plano(
                 f"✅ Etapa {numero} concluída."
             )
 
-            print(
-                "📊 "
-                f"{gerenciador_tarefas.obter_progresso()}"
-            )
+            if not apenas_consulta_tarefa:
+                print(
+                    "📊 "
+                    f"{gerenciador_tarefas.obter_progresso()}"
+                )
 
         except Exception as erro:
             mensagem = (
@@ -184,7 +200,10 @@ def executar_plano(
 
             etapa["executado"] = False
 
-            if isinstance(numero, int):
+            if (
+                not apenas_consulta_tarefa
+                and isinstance(numero, int)
+            ):
                 gerenciador_tarefas.marcar_erro(
                     numero=numero,
                     mensagem=str(erro)
