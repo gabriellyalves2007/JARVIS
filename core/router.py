@@ -1,12 +1,12 @@
 from enum import Enum
 
 from core.intencoes import Intencao
+from ia.interpretador import interpretador
 
 
 class Destino(Enum):
     """
-    Destinos possíveis para o processamento
-    de um comando do JARVIS.
+    Destinos disponíveis para o processamento.
     """
 
     EXECUTOR = "executor"
@@ -20,7 +20,7 @@ class Destino(Enum):
 class Router:
     """
     Decide qual componente deve processar
-    uma intenção identificada pelo JARVIS.
+    o comando recebido pelo JARVIS.
     """
 
     def decidir(
@@ -30,6 +30,48 @@ class Router:
     ) -> Destino:
         if intencao is None:
             return Destino.DESCONHECIDO
+
+        texto = interpretador.interpretar(comando)
+
+        # Perguntas que procuram uma explicação.
+        perguntas_conhecimento = (
+            "quem e",
+            "quem foi",
+            "o que e",
+            "o que sao",
+            "explique",
+            "fale sobre",
+            "me explique",
+            "defina",
+        )
+
+        if (
+            intencao == Intencao.PESQUISAR
+            and any(
+                expressao in texto
+                for expressao in perguntas_conhecimento
+            )
+        ):
+            return Destino.INTERNET
+
+        # Pedidos explícitos de pesquisa continuam
+        # sendo executados pela habilidade que abre o Google.
+        pesquisas_google = (
+            "pesquise",
+            "pesquisar",
+            "procure",
+            "buscar",
+            "busque",
+        )
+
+        if (
+            intencao == Intencao.PESQUISAR
+            and any(
+                expressao in texto
+                for expressao in pesquisas_google
+            )
+        ):
+            return Destino.EXECUTOR
 
         intencoes_executor = {
             Intencao.ABRIR_GOOGLE,

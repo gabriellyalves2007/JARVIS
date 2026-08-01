@@ -1,3 +1,4 @@
+from assistente.comandos import pesquisar as pesquisar_conhecimento
 from assistente.memoria import salvar_conversa
 
 from core.contexto import contexto
@@ -12,28 +13,19 @@ from ia.resolvedor import resolvedor
 
 class Pipeline:
     """
-    Coordena todo o fluxo de processamento do JARVIS.
+    Coordena o fluxo completo de processamento do JARVIS.
     """
 
     def antes_processar(
         self,
         texto: str
     ) -> str:
-        """
-        Prepara o texto recebido pela interface.
-        """
-
         return str(texto).strip()
 
     def antes_interpretar(
         self,
         comando: str
     ) -> str:
-        """
-        Corrige o comando e resolve referências
-        relacionadas ao contexto da conversa.
-        """
-
         comando_corrigido = corretor.corrigir(
             comando
         )
@@ -55,21 +47,12 @@ class Pipeline:
         self,
         plano: dict
     ) -> dict:
-        """
-        Permite validar ou modificar o plano
-        antes de executá-lo.
-        """
-
         return plano
 
     def depois_executar(
         self,
         resposta: str
     ) -> str:
-        """
-        Prepara e valida a resposta final.
-        """
-
         resposta = str(resposta).strip()
 
         if not resposta:
@@ -80,15 +63,21 @@ class Pipeline:
     def executar_por_destino(
         self,
         destino: Destino,
-        plano: dict
+        plano: dict,
+        comando: str
     ) -> str:
         """
-        Envia o plano para o componente escolhido
-        pelo Router.
+        Encaminha o comando para o destino
+        escolhido pelo Router.
         """
 
         if destino == Destino.EXECUTOR:
             return executar_plano(plano)
+
+        if destino == Destino.INTERNET:
+            return pesquisar_conhecimento(
+                comando
+            )
 
         if destino == Destino.MEMORIA:
             return (
@@ -100,12 +89,6 @@ class Pipeline:
             return (
                 "O módulo de inteligência artificial "
                 "ainda não foi integrado."
-            )
-
-        if destino == Destino.INTERNET:
-            return (
-                "O módulo específico de internet "
-                "ainda não está disponível."
             )
 
         if destino == Destino.PLUGIN:
@@ -215,7 +198,8 @@ class Pipeline:
 
             resposta = self.executar_por_destino(
                 destino=destino,
-                plano=plano
+                plano=plano,
+                comando=comando
             )
 
             resposta = self.depois_executar(
