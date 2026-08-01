@@ -1,46 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "repete",
-            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
-        },
-        {
-            "pergunta": "repete",
-            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
-        },
-        {
-            "pergunta": "abra a calculadora e diga as horas",
-            "resposta": "Abrindo a calculadora.\nSão exatamente 13:25."
-        },
-        {
-            "pergunta": "abra o google e pesquise python",
-            "resposta": "Tudo certo. Abrindo o Google.\nPython é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
-            "pergunta": "que horas são?",
-            "resposta": "Neste momento são 13:34."
-        },
-        {
-            "pergunta": "abra o google",
-            "resposta": "Claro. Abrindo o Google."
-        },
-        {
-            "pergunta": "abra o google e pesquise python",
-            "resposta": "Claro. Abrindo o Google.\nPython é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
-            "pergunta": "pesquise python",
-            "resposta": "Python é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
-            "pergunta": "abra o Google e pesquise Python",
-            "resposta": "Claro. Abrindo o Google.\nPython é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
-            "pergunta": "abra o Google e pesquise Python",
-            "resposta": "Claro. Abrindo o Google.\nPython é uma linguagem de programação de alto nível, interpretada de script, imperativa, orientada a objetos, funcional, de tipagem dinâmica e forte. Foi lançada por Guido van Rossum em 1991. Atualmente, possui um modelo de desenvolvimento comunitário, aberto e gerenciado pela organização sem fins lucrativos Python Software Foundation."
-        },
-        {
             "pergunta": "abra o Google e pesquise Python",
             "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google."
         },
@@ -119,6 +79,46 @@
         {
             "pergunta": "abra a calcudora",
             "resposta": "Abrindo a calculadora."
+        },
+        {
+            "pergunta": "zezé de camargo",
+            "resposta": "Mirosmar José de Camargo (Pirenópolis, 17 de agosto de 1962), mais conhecido pelo nome artístico Zezé Di Camargo, é um cantor e compositor brasileiro. Integra juntamente com seu irmão, Luciano Camargo, a dupla sertaneja Zezé Di Camargo & Luciano, que vendeu mais de 30 milhões de discos. Zezé é considerado um ícone sertanejo, responsável pela ascensão do gênero nas décadas de 1990 e 2000 com composições e interpretações relevantes, sendo uma delas, \"É o Amor\", considerada o maior sucesso da dupla."
+        },
+        {
+            "pergunta": "abra o youtube",
+            "resposta": "Tudo pronto. YouTube iniciado."
+        },
+        {
+            "pergunta": "abra o google e pesquise zezé de camargo",
+            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'zezé de camargo' no Google."
+        },
+        {
+            "pergunta": "abra o youtube e toque uma playlist da gravadora novo tempo",
+            "resposta": "Tudo pronto. YouTube iniciado.\nPriscilla Novaes Leone, mais conhecida como Pitty (Salvador, 7 de outubro de 1977), é uma cantora, compositora e musicista brasileira. Como cantora desde os 17 anos de idade, Pitty iniciou sua carreira profissionalmente em 1997, atuando como baterista durante dois anos na banda de punk rock Shes; apesar de realizarem alguns shows, a banda não chegou a gravar nenhum álbum. Em 1998, integra a banda de hardcore punk Inkoma, dessa vez atuando como vocalista, onde gravou um álbum de estúdio, tornando-se bastante popular na cena underground da Bahia."
+        },
+        {
+            "pergunta": "abra o youtube e toque a musica intensamente adoradores 5",
+            "resposta": "Abrindo o YouTube.\nNão encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abra o Google",
+            "resposta": "Tudo certo. Abrindo o Google."
+        },
+        {
+            "pergunta": "pesquise Python",
+            "resposta": "Pesquisando por 'Python' no Google."
+        },
+        {
+            "pergunta": "abra o Google e pesquise inteligência artificial",
+            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'inteligência artificial' no Google."
+        },
+        {
+            "pergunta": "que horas são?",
+            "resposta": "O relógio marca 14:27."
+        },
+        {
+            "pergunta": "qual é meu nome?",
+            "resposta": "Claro. Seu nome é Gabrielly."
         }
     ],
     "nome": "Gabrielly"

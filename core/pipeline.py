@@ -3,6 +3,7 @@ from assistente.memoria import salvar_conversa
 from core.contexto import contexto
 from core.executor import executar_plano
 from core.intencoes import identificar_intencao
+from core.router import router
 
 from ia.corretor import corretor
 from ia.planejador import planejador
@@ -15,21 +16,12 @@ class Pipeline:
         self,
         texto: str
     ) -> str:
-        """
-        Prepara a entrada recebida pela interface.
-        """
-
         return str(texto).strip()
 
     def antes_interpretar(
         self,
         comando: str
     ) -> str:
-        """
-        Corrige o texto e resolve referências
-        à conversa anterior.
-        """
-
         comando_corrigido = corretor.corrigir(
             comando
         )
@@ -48,27 +40,47 @@ class Pipeline:
         self,
         plano: dict
     ) -> dict:
-        """
-        Permite validar ou modificar o plano
-        antes de sua execução.
-        """
-
         return plano
 
     def depois_executar(
         self,
         resposta: str
     ) -> str:
-        """
-        Prepara a resposta final.
-        """
-
         resposta = str(resposta).strip()
 
         if not resposta:
             return "Não consegui produzir uma resposta."
 
         return resposta
+
+    def executar_por_destino(
+        self,
+        destino: str,
+        plano: dict
+    ) -> str:
+        """
+        Encaminha o plano ao componente escolhido pelo Router.
+        """
+
+        if destino == router.DESTINO_EXECUTOR:
+            return executar_plano(plano)
+
+        if destino == router.DESTINO_MEMORIA:
+            return (
+                "O módulo de memória ainda não está "
+                "disponível neste fluxo."
+            )
+
+        if destino == router.DESTINO_IA:
+            return (
+                "O módulo de inteligência artificial "
+                "ainda não foi integrado."
+            )
+
+        return (
+            "Não encontrei um destino adequado "
+            "para esse comando."
+        )
 
     def executar(
         self,
@@ -97,17 +109,26 @@ class Pipeline:
                     f"🔗 Comando processado: {comando}"
                 )
 
-            intencao = identificar_intencao(
+            intencao_inicial = identificar_intencao(
                 comando
             )
 
             print(
-                f"🧠 Intenção inicial: "
-                f"{intencao.name}"
+                "🧠 Intenção inicial: "
+                f"{intencao_inicial.name}"
+            )
+
+            destino = router.decidir(
+                intencao=intencao_inicial,
+                comando=comando
+            )
+
+            print(
+                f"🧭 Destino: {destino}"
             )
 
             plano = planejador.criar_plano(
-                intencao,
+                intencao_inicial,
                 comando
             )
 
@@ -131,8 +152,9 @@ class Pipeline:
                     f"{etapa['comando']}"
                 )
 
-            resposta = executar_plano(
-                plano
+            resposta = self.executar_por_destino(
+                destino=destino,
+                plano=plano
             )
 
             resposta = self.depois_executar(
@@ -142,7 +164,7 @@ class Pipeline:
             ultima_intencao = (
                 etapas[-1]["intencao"]
                 if etapas
-                else intencao
+                else intencao_inicial
             )
 
             contexto.adicionar(
