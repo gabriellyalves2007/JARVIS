@@ -5,71 +5,87 @@ from core.intencoes import identificar_intencao
 
 class Planejador:
     """
-    Cria planos com uma ou várias etapas.
+    Planejador inteligente.
 
-    Exemplos:
-    - "abra o Google"
-    - "abra o Google e abra o YouTube"
-    - "abra a calculadora, depois diga as horas"
+    Recebe um comando do usuário e transforma
+    em um plano composto por uma ou várias etapas.
     """
 
-    def dividir_comando(self, comando: str) -> list[str]:
+    SEPARADORES = (
+        r"\be depois\b",
+        r"\bdepois\b",
+        r"\bem seguida\b",
+        r"\bentão\b",
+        r"\bentao\b",
+        r"\blogo após\b",
+        r"\blogo apos\b",
+        r"\bpor fim\b",
+        r"\be\b",
+        ",",
+        ";",
+    )
+
+    def dividir_comando(
+        self,
+        comando: str
+    ) -> list[str]:
+
         comando = comando.strip()
 
-        if not comando:
-            return []
+        regex = "|".join(self.SEPARADORES)
 
         partes = re.split(
-            r"\s*(?:,|;|\be depois\b|\bdepois\b|\be\b)\s*",
+            regex,
             comando,
             flags=re.IGNORECASE
         )
 
-        return [
-            parte.strip()
-            for parte in partes
-            if parte.strip()
-        ]
+        resultado = []
+
+        for parte in partes:
+
+            parte = parte.strip()
+
+            if parte:
+                resultado.append(parte)
+
+        return resultado
 
     def criar_plano(
         self,
         intencao,
         comando: str
     ) -> dict:
-        comando = comando.strip()
-
-        comandos = self.dividir_comando(comando)
-
-        if not comandos:
-            return {
-                "comando_original": comando,
-                "etapas": []
-            }
 
         etapas = []
 
-        for indice, comando_etapa in enumerate(comandos):
-            # Se houver somente uma etapa, reaproveita
-            # a intenção já identificada pelo Core.
+        comandos = self.dividir_comando(
+            comando
+        )
+
+        for indice, trecho in enumerate(comandos):
+
             if len(comandos) == 1:
                 intencao_etapa = intencao
+
             else:
                 intencao_etapa = identificar_intencao(
-                    comando_etapa
+                    trecho
                 )
 
             etapas.append(
                 {
                     "numero": indice + 1,
-                    "tipo": "executar_intencao",
+                    "comando": trecho,
                     "intencao": intencao_etapa,
-                    "comando": comando_etapa,
+                    "executado": False,
                 }
             )
 
         return {
             "comando_original": comando,
-            "etapas": etapas
+            "total": len(etapas),
+            "etapas": etapas,
         }
 
 
