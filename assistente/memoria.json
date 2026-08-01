@@ -1,0 +1,81 @@
+{
+    "chat": [
+        {
+            "pergunta": "Olá!",
+            "resposta": "Encontrei vários resultados. Seja mais específico."
+        },
+        {
+            "pergunta": "que fase a lua está hoje?",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "abra o youtube",
+            "resposta": "Abrindo YouTube."
+        },
+        {
+            "pergunta": "abra o google",
+            "resposta": "Abrindo Google."
+        },
+        {
+            "pergunta": "meu nome é gabrielly",
+            "resposta": "Prazer, Gabrielly. Vou lembrar disso."
+        },
+        {
+            "pergunta": "qual é o meu nome?",
+            "resposta": "Meu Nome é Gal é um filme brasileiro de drama que conta sobre a fase de vida da cantora brasileira Gal Costa, quando com 20 anos vai para o Rio de Janeiro, onde inicia sua vida de artista.\n\n\n== Enredo ==\nMaria da Graça Costa Penna Burgos é uma moça de apenas 20 anos que resolve deixar a Bahia rumo à cidade de Rio de Janeiro, por coincidência encontra seus amigos conterrâneos artistas Caetano Veloso, Maria Bethânia, Gilberto Gil e Dedé Gadelha, que dão auxílio para se tornar uma cantora da música popular brasileira. Muito tímida, acaba tendo dificuldades em se soltar, mas com ajuda maior de dois dos amigos vence a timidez e juntos fundam o movimento musical conhecido como Tropicália; porém, dois de seus amigos faz algo que desagrada a ditadura militar brasileira e são exilados."
+        },
+        {
+            "pergunta": "você não se lembrou",
+            "resposta": "Não encontrei informações sobre isso."
+        },
+        {
+            "pergunta": "qual é o meu nome?",
+            "resposta": "Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "horas/",
+            "resposta": "A hora (símbolo: h) é uma unidade de medida de tempo que tem por base a velocidade de rotação e as dimensões da Terra.\nNa convenção moderna uma hora é correspondente a 60 minutos ou 3 600 segundos. Isso é aproximadamente 1/24 (um vinte e quatro avos) de um dia da Terra."
+        },
+        {
+            "pergunta": "que horas são?",
+            "resposta": "Agora são 22:57."
+        },
+        {
+            "pergunta": "qual o seu nome?",
+            "resposta": "Qual É o Seu Talento? (abreviado pela sigla QST?) foi um programa de televisão brasileiro produzido e exibido pelo SBT de 5 de agosto de 2009 a 9 de janeiro de 2012 baseado num antigo programa de Silvio Santos, o Show de Calouros. O programa era no formato de talent show, com direção de Ricardo Mantovanelli e apresentado por André Vasco."
+        },
+        {
+            "pergunta": "qual meu nome?",
+            "resposta": "Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "abrir youtube",
+            "resposta": "Abrindo YouTube."
+        },
+        {
+            "pergunta": "que horas são?",
+            "resposta": "Agora são 23:34."
+        },
+        {
+            "pergunta": "abra o google",
+            "resposta": "Abrindo Google."
+        },
+        {
+            "pergunta": "abra o youtube",
+            "resposta": "Abrindo YouTube."
+        },
+        {
+            "pergunta": "qual éo meu nome?",
+            "resposta": "Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "repete",
+            "resposta": "Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "abra o google",
+            "resposta": "Claro. Abrindo o Google."
+        }
+    ],
+    "nome": "Gabrielly"
+}

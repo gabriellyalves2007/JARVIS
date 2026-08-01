@@ -1,0 +1,21 @@
+# Ambiente virtual
+.venv/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
