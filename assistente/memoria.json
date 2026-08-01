@@ -1,18 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abra o Google",
-            "resposta": "Tudo certo. Abrindo o Google."
-        },
-        {
-            "pergunta": "pesquise Python",
-            "resposta": "Pesquisando por 'Python' no Google."
-        },
-        {
-            "pergunta": "que horas são?",
-            "resposta": "Neste momento são 14:32."
-        },
-        {
             "pergunta": "abra o Google e pesquise inteligência artificial",
             "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'inteligência artificial' no Google."
         },
@@ -119,6 +107,18 @@
         {
             "pergunta": "qual tarefa você está executando?",
             "resposta": "A tarefa 'abra o Google, pesquise Python e abra o YouTube' foi concluída. Foram executadas 3 etapas."
+        },
+        {
+            "pergunta": "cancele a tarefa",
+            "resposta": "Não existe nenhuma tarefa para cancelar."
+        },
+        {
+            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
+            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'Python' no Google.\nPode aproveitar. Abrindo o YouTube."
+        },
+        {
+            "pergunta": "cancele a tarefa",
+            "resposta": "A última tarefa já foi concluída."
         }
     ],
     "nome": "Gabrielly"

@@ -46,7 +46,8 @@ class Router:
             intencao == Intencao.PESQUISAR
             and any(
                 expressao in texto
-                for expressao in perguntas_conhecimento
+                for expressao
+                in perguntas_conhecimento
             )
         ):
             return Destino.INTERNET
@@ -63,7 +64,8 @@ class Router:
             intencao == Intencao.PESQUISAR
             and any(
                 expressao in texto
-                for expressao in pesquisas_google
+                for expressao
+                in pesquisas_google
             )
         ):
             return Destino.EXECUTOR
@@ -77,6 +79,7 @@ class Router:
             Intencao.LEMBRAR_NOME,
             Intencao.REPETIR,
             Intencao.CONSULTAR_TAREFA,
+            Intencao.CANCELAR_TAREFA,
             Intencao.PESQUISAR,
         }
 

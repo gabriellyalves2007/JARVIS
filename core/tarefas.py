@@ -45,8 +45,7 @@ class GerenciadorTarefas:
 
     def iniciar(self, plano: dict) -> None:
         """
-        Cria uma tarefa a partir do plano
-        gerado pelo planejador.
+        Cria uma nova tarefa a partir do plano.
         """
 
         etapas_plano = plano.get(
@@ -116,7 +115,7 @@ class GerenciadorTarefas:
         mensagem: str
     ) -> None:
         """
-        Registra o erro ocorrido em uma etapa.
+        Registra um erro ocorrido em uma etapa.
         """
 
         tarefa = self._tarefa
@@ -135,20 +134,41 @@ class GerenciadorTarefas:
         tarefa.etapa_atual = numero
         tarefa.concluida = False
 
-    def cancelar(self) -> bool:
+    def cancelar(self) -> tuple[bool, str]:
         """
-        Marca a tarefa atual como cancelada.
+        Solicita o cancelamento da tarefa atual.
+
+        O cancelamento será respeitado antes
+        da próxima etapa começar.
         """
 
-        if self._tarefa is None:
-            return False
+        tarefa = self._tarefa
 
-        if self._tarefa.concluida:
-            return False
+        if tarefa is None:
+            return (
+                False,
+                "Não existe nenhuma tarefa para cancelar."
+            )
 
-        self._tarefa.cancelada = True
+        if tarefa.cancelada:
+            return (
+                False,
+                "A tarefa atual já foi cancelada."
+            )
 
-        return True
+        if tarefa.concluida:
+            return (
+                False,
+                "A última tarefa já foi concluída."
+            )
+
+        tarefa.cancelada = True
+
+        return (
+            True,
+            "Cancelamento solicitado. "
+            "As próximas etapas não serão executadas."
+        )
 
     def foi_cancelada(self) -> bool:
         """
@@ -177,8 +197,18 @@ class GerenciadorTarefas:
         if tarefa is None:
             return "Nenhuma tarefa em andamento."
 
+        concluidas = sum(
+            1
+            for etapa in tarefa.etapas
+            if etapa.concluida
+        )
+
         if tarefa.cancelada:
-            return "A tarefa atual foi cancelada."
+            return (
+                "A tarefa atual foi cancelada após "
+                f"{concluidas} de "
+                f"{tarefa.total_etapas} etapas."
+            )
 
         if tarefa.concluida:
             return (
@@ -186,12 +216,6 @@ class GerenciadorTarefas:
                 f"{tarefa.total_etapas} de "
                 f"{tarefa.total_etapas} etapas."
             )
-
-        concluidas = sum(
-            1
-            for etapa in tarefa.etapas
-            if etapa.concluida
-        )
 
         return (
             f"Progresso: {concluidas} de "

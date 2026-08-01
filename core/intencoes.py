@@ -16,6 +16,7 @@ class Intencao(Enum):
     REPETIR = auto()
 
     CONSULTAR_TAREFA = auto()
+    CANCELAR_TAREFA = auto()
 
     PESQUISAR = auto()
 
@@ -33,10 +34,6 @@ def contem_alguma(
 def identificar_intencao(
     comando: str
 ) -> Intencao:
-    """
-    Identifica a intenção principal do usuário.
-    """
-
     texto = interpretador.interpretar(
         comando
     )
@@ -124,21 +121,41 @@ def identificar_intencao(
         "a tarefa foi concluida",
     )
 
-    # Salvar nome
+    palavras_cancelar_tarefa = (
+        "cancele a tarefa",
+        "cancelar a tarefa",
+        "cancele essa tarefa",
+        "cancele a execucao",
+        "cancelar a execucao",
+        "pare a tarefa",
+        "pare a execucao",
+        "interrompa a tarefa",
+        "interrompa a execucao",
+        "interrompa",
+        "cancelar",
+        "cancele",
+    )
+
     if contem_alguma(
         texto,
         palavras_salvar_nome
     ):
         return Intencao.SALVAR_NOME
 
-    # Consultar tarefa precisa vir antes da pesquisa.
+    # Cancelamento precisa ser reconhecido
+    # antes da consulta de progresso.
+    if contem_alguma(
+        texto,
+        palavras_cancelar_tarefa
+    ):
+        return Intencao.CANCELAR_TAREFA
+
     if contem_alguma(
         texto,
         palavras_consultar_tarefa
     ):
         return Intencao.CONSULTAR_TAREFA
 
-    # Regra adicional para variações sobre tarefa.
     if (
         contem_alguma(
             texto,
@@ -163,14 +180,12 @@ def identificar_intencao(
     ):
         return Intencao.CONSULTAR_TAREFA
 
-    # Repetir resposta
     if contem_alguma(
         texto,
         palavras_repetir
     ):
         return Intencao.REPETIR
 
-    # Perguntar nome
     if contem_alguma(
         texto,
         palavras_perguntar_nome
@@ -200,7 +215,6 @@ def identificar_intencao(
     ):
         return Intencao.LEMBRAR_NOME
 
-    # Horário
     if contem_alguma(
         texto,
         palavras_horario
@@ -229,7 +243,6 @@ def identificar_intencao(
     ):
         return Intencao.INFORMAR_HORAS
 
-    # Aplicações
     if "google" in texto:
         return Intencao.ABRIR_GOOGLE
 

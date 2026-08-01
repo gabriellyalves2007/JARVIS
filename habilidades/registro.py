@@ -5,7 +5,7 @@ from habilidades.google import google
 from habilidades.horario import horario
 from habilidades.memoria import Memoria
 from habilidades.pesquisa import pesquisa
-from habilidades.tarefa import tarefa
+from habilidades.tarefa import HabilidadeTarefa
 from habilidades.youtube import youtube
 
 
@@ -57,7 +57,16 @@ class RegistroHabilidades:
 
         self.registrar(
             Intencao.CONSULTAR_TAREFA,
-            tarefa
+            HabilidadeTarefa(
+                Intencao.CONSULTAR_TAREFA
+            )
+        )
+
+        self.registrar(
+            Intencao.CANCELAR_TAREFA,
+            HabilidadeTarefa(
+                Intencao.CANCELAR_TAREFA
+            )
         )
 
         self.registrar(
