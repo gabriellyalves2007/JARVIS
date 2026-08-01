@@ -4,14 +4,79 @@ from core.contexto import contexto
 from core.executor import executar_plano
 from core.intencoes import identificar_intencao
 
+from ia.corretor import corretor
 from ia.planejador import planejador
 from ia.resolvedor import resolvedor
 
 
 class Pipeline:
 
-    def executar(self, texto: str) -> str:
-        texto_original = str(texto).strip()
+    def antes_processar(
+        self,
+        texto: str
+    ) -> str:
+        """
+        Prepara a entrada recebida pela interface.
+        """
+
+        return str(texto).strip()
+
+    def antes_interpretar(
+        self,
+        comando: str
+    ) -> str:
+        """
+        Corrige o texto e resolve referências
+        à conversa anterior.
+        """
+
+        comando_corrigido = corretor.corrigir(
+            comando
+        )
+
+        if comando_corrigido.lower() != comando.lower():
+            print(
+                "✏️ Comando corrigido: "
+                f"{comando_corrigido}"
+            )
+
+        return resolvedor.resolver(
+            comando_corrigido
+        )
+
+    def depois_planejar(
+        self,
+        plano: dict
+    ) -> dict:
+        """
+        Permite validar ou modificar o plano
+        antes de sua execução.
+        """
+
+        return plano
+
+    def depois_executar(
+        self,
+        resposta: str
+    ) -> str:
+        """
+        Prepara a resposta final.
+        """
+
+        resposta = str(resposta).strip()
+
+        if not resposta:
+            return "Não consegui produzir uma resposta."
+
+        return resposta
+
+    def executar(
+        self,
+        texto: str
+    ) -> str:
+        texto_original = self.antes_processar(
+            texto
+        )
 
         if not texto_original:
             return "Digite um comando."
@@ -19,15 +84,17 @@ class Pipeline:
         print("\n========== PIPELINE ==========")
 
         try:
-            print(f"👤 Entrada: {texto_original}")
+            print(
+                f"👤 Entrada: {texto_original}"
+            )
 
-            comando = resolvedor.resolver(
+            comando = self.antes_interpretar(
                 texto_original
             )
 
-            if comando != texto_original:
+            if comando.lower() != texto_original.lower():
                 print(
-                    f"🔗 Contexto: {comando}"
+                    f"🔗 Comando processado: {comando}"
                 )
 
             intencao = identificar_intencao(
@@ -42,6 +109,10 @@ class Pipeline:
             plano = planejador.criar_plano(
                 intencao,
                 comando
+            )
+
+            plano = self.depois_planejar(
+                plano
             )
 
             etapas = plano.get(
@@ -64,13 +135,9 @@ class Pipeline:
                 plano
             )
 
-            if not resposta:
-                resposta = (
-                    "Não consegui processar "
-                    "esse comando."
-                )
-
-            resposta = str(resposta).strip()
+            resposta = self.depois_executar(
+                resposta
+            )
 
             ultima_intencao = (
                 etapas[-1]["intencao"]
@@ -89,7 +156,10 @@ class Pipeline:
                 resposta
             )
 
-            print(f"🤖 Resposta: {resposta}")
+            print(
+                f"🤖 Resposta: {resposta}"
+            )
+
             print("💾 Contexto atualizado")
             print("==============================\n")
 
@@ -97,7 +167,7 @@ class Pipeline:
 
         except Exception as erro:
             print(
-                f"❌ Erro no pipeline: {erro}"
+                f"❌ Erro no Pipeline: {erro}"
             )
 
             print("==============================\n")

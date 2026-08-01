@@ -1,22 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abrir youtube",
-            "resposta": "Abrindo YouTube."
-        },
-        {
-            "pergunta": "que horas são?",
-            "resposta": "Agora são 23:34."
-        },
-        {
-            "pergunta": "abra o google",
-            "resposta": "Abrindo Google."
-        },
-        {
-            "pergunta": "abra o youtube",
-            "resposta": "Abrindo YouTube."
-        },
-        {
             "pergunta": "qual éo meu nome?",
             "resposta": "Seu nome é Gabrielly."
         },
@@ -119,6 +103,22 @@
         {
             "pergunta": "abra o Google, pesquise Python e abra o YouTube",
             "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
+        },
+        {
+            "pergunta": "abri o gugou",
+            "resposta": "Pode deixar. Abrindo o Google agora."
+        },
+        {
+            "pergunta": "pesquiza python",
+            "resposta": "Pesquisando por 'python' no Google."
+        },
+        {
+            "pergunta": "abri o gugou e pesquiza inteligência artificial",
+            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'inteligência artificial' no Google."
+        },
+        {
+            "pergunta": "abri a calculadoura",
+            "resposta": "Abrindo a calculadora."
         }
     ],
     "nome": "Gabrielly"
