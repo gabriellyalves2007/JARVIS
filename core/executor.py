@@ -37,7 +37,8 @@ def executar_intencao(
 
 def executar_plano(plano: dict) -> str:
     """
-    Executa todas as etapas de um plano na ordem.
+    Executa todas as etapas do plano em ordem
+    e registra o estado de cada uma.
     """
 
     etapas = plano.get("etapas", [])
@@ -51,19 +52,45 @@ def executar_plano(plano: dict) -> str:
         intencao = etapa.get("intencao")
         comando = etapa.get("comando", "")
 
+        etapa["executado"] = False
+        etapa["resposta"] = ""
+        etapa["erro"] = ""
+
         if intencao is None:
-            respostas.append(
-                "Não consegui identificar uma das ações."
+            etapa["erro"] = (
+                "Não consegui identificar a intenção."
             )
+
+            respostas.append(etapa["erro"])
             continue
 
-        resposta = executar_intencao(
-            intencao=intencao,
-            comando=comando
-        )
+        try:
+            resposta = executar_intencao(
+                intencao=intencao,
+                comando=comando
+            )
 
-        if resposta:
-            respostas.append(resposta)
+            etapa["resposta"] = resposta
+            etapa["executado"] = True
+
+            if resposta:
+                respostas.append(resposta)
+
+        except Exception as erro:
+            mensagem_erro = (
+                f"Não consegui executar a etapa "
+                f"{etapa.get('numero', '?')}."
+            )
+
+            etapa["erro"] = str(erro)
+            etapa["executado"] = False
+
+            print(
+                f"❌ Erro na etapa "
+                f"{etapa.get('numero', '?')}: {erro}"
+            )
+
+            respostas.append(mensagem_erro)
 
     if not respostas:
         return "Não consegui executar o plano."

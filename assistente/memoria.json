@@ -1,10 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "qual o seu nome?",
-            "resposta": "Qual É o Seu Talento? (abreviado pela sigla QST?) foi um programa de televisão brasileiro produzido e exibido pelo SBT de 5 de agosto de 2009 a 9 de janeiro de 2012 baseado num antigo programa de Silvio Santos, o Show de Calouros. O programa era no formato de talent show, com direção de Ricardo Mantovanelli e apresentado por André Vasco."
-        },
-        {
             "pergunta": "qual meu nome?",
             "resposta": "Seu nome é Gabrielly."
         },
@@ -119,6 +115,10 @@
         {
             "pergunta": "bra o Google, em seguida pesquise Python e depois abra o YouTube",
             "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
+        },
+        {
+            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
+            "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google.\nAbrindo o YouTube."
         }
     ],
     "nome": "Gabrielly"
