@@ -99,6 +99,22 @@
         {
             "pergunta": "repete",
             "resposta": "Você se chama Gabrielly."
+        },
+        {
+            "pergunta": "abra o google e abra o youtube",
+            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
+        },
+        {
+            "pergunta": "repete",
+            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
+        },
+        {
+            "pergunta": "repete",
+            "resposta": "Google sendo iniciado.\nAbrindo o YouTube."
+        },
+        {
+            "pergunta": "abra a calculadora e diga as horas",
+            "resposta": "Abrindo a calculadora.\nSão exatamente 13:25."
         }
     ],
     "nome": "Gabrielly"

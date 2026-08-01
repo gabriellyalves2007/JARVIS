@@ -1,7 +1,7 @@
 from assistente.memoria import salvar_conversa
 
 from core.contexto import contexto
-from core.executor import executar_intencao
+from core.executor import executar_plano
 from core.intencoes import identificar_intencao
 
 from ia.planejador import planejador
@@ -14,10 +14,10 @@ def processar_entrada(texto: str) -> str:
 
     1. recebe o texto;
     2. resolve referências ao contexto;
-    3. identifica a intenção;
-    4. cria um plano;
-    5. executa o plano;
-    6. registra a conversa no contexto e no histórico.
+    3. identifica a intenção inicial;
+    4. cria um plano de execução;
+    5. executa todas as etapas;
+    6. registra a conversa.
     """
 
     texto_original = str(texto).strip()
@@ -30,7 +30,6 @@ def processar_entrada(texto: str) -> str:
     try:
         print(f"👤 Entrada: {texto_original}")
 
-        # Completa comandos que dependem da conversa anterior.
         comando_resolvido = resolvedor.resolver(
             texto_original
         )
@@ -41,28 +40,34 @@ def processar_entrada(texto: str) -> str:
                 f"{comando_resolvido}"
             )
 
-        # O intencoes.py já utiliza o interpretador
-        # para normalizar e analisar o texto.
-        intencao = identificar_intencao(
+        intencao_inicial = identificar_intencao(
             comando_resolvido
         )
 
-        print(f"🧠 Intenção: {intencao.name}")
+        print(
+            "🧠 Intenção inicial: "
+            f"{intencao_inicial.name}"
+        )
 
         plano = planejador.criar_plano(
-            intencao=intencao,
+            intencao=intencao_inicial,
             comando=comando_resolvido
         )
 
+        etapas = plano.get("etapas", [])
+
         print(
-            f"📋 Etapas do plano: "
-            f"{len(plano['etapas'])}"
+            f"📋 Etapas do plano: {len(etapas)}"
         )
 
-        resposta = executar_intencao(
-            plano["intencao"],
-            plano["comando"]
-        )
+        for etapa in etapas:
+            print(
+                f"   {etapa['numero']}. "
+                f"{etapa['intencao'].name} → "
+                f"{etapa['comando']}"
+            )
+
+        resposta = executar_plano(plano)
 
         if not resposta:
             resposta = (
@@ -71,16 +76,20 @@ def processar_entrada(texto: str) -> str:
 
         resposta = str(resposta).strip()
 
-        # Guarda a interação na memória temporária.
+        ultima_intencao = (
+            etapas[-1]["intencao"]
+            if etapas
+            else intencao_inicial
+        )
+
         contexto.adicionar(
             pergunta=texto_original,
             resposta=resposta,
-            intencao=intencao
+            intencao=ultima_intencao
         )
 
         print(f"🤖 Resposta: {resposta}")
 
-        # Guarda a conversa na memória permanente.
         salvar_conversa(
             texto_original,
             resposta
