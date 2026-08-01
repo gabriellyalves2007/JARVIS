@@ -9,7 +9,7 @@ def executar_intencao(
     comando: str
 ) -> str:
     """
-    Executa uma única intenção utilizando
+    Executa uma única intenção usando
     o registro de habilidades.
     """
 
@@ -37,8 +37,11 @@ def executar_intencao(
 
 def executar_plano(plano: dict) -> str:
     """
-    Executa todas as etapas do plano em ordem
-    e registra o estado de cada uma.
+    Executa todas as etapas do plano em ordem.
+
+    Se ocorrer uma falha real durante uma etapa,
+    interrompe as próximas ações para evitar
+    uma execução inconsistente.
     """
 
     etapas = plano.get("etapas", [])
@@ -49,6 +52,7 @@ def executar_plano(plano: dict) -> str:
     respostas = []
 
     for etapa in etapas:
+        numero = etapa.get("numero", "?")
         intencao = etapa.get("intencao")
         comando = etapa.get("comando", "")
 
@@ -57,18 +61,32 @@ def executar_plano(plano: dict) -> str:
         etapa["erro"] = ""
 
         if intencao is None:
-            etapa["erro"] = (
-                "Não consegui identificar a intenção."
+            mensagem = (
+                f"Não consegui identificar a etapa {numero}. "
+                "As próximas ações foram canceladas."
             )
 
-            respostas.append(etapa["erro"])
-            continue
+            etapa["erro"] = mensagem
+            respostas.append(mensagem)
+
+            print(
+                f"❌ Etapa {numero} sem intenção identificada."
+            )
+
+            break
 
         try:
+            print(
+                f"⚙️ Executando etapa {numero}: "
+                f"{intencao.name} → {comando}"
+            )
+
             resposta = executar_intencao(
                 intencao=intencao,
                 comando=comando
             )
+
+            resposta = str(resposta).strip()
 
             etapa["resposta"] = resposta
             etapa["executado"] = True
@@ -76,21 +94,26 @@ def executar_plano(plano: dict) -> str:
             if resposta:
                 respostas.append(resposta)
 
+            print(
+                f"✅ Etapa {numero} concluída."
+            )
+
         except Exception as erro:
-            mensagem_erro = (
-                f"Não consegui executar a etapa "
-                f"{etapa.get('numero', '?')}."
+            mensagem = (
+                f"Não consegui executar a etapa {numero}. "
+                "As próximas ações foram canceladas."
             )
 
             etapa["erro"] = str(erro)
             etapa["executado"] = False
 
             print(
-                f"❌ Erro na etapa "
-                f"{etapa.get('numero', '?')}: {erro}"
+                f"❌ Erro na etapa {numero}: {erro}"
             )
 
-            respostas.append(mensagem_erro)
+            respostas.append(mensagem)
+
+            break
 
     if not respostas:
         return "Não consegui executar o plano."

@@ -1,10 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "qual meu nome?",
-            "resposta": "Seu nome é Gabrielly."
-        },
-        {
             "pergunta": "abrir youtube",
             "resposta": "Abrindo YouTube."
         },
@@ -119,6 +115,10 @@
         {
             "pergunta": "abra o Google, pesquise Python e abra o YouTube",
             "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google.\nAbrindo o YouTube."
+        },
+        {
+            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
+            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
         }
     ],
     "nome": "Gabrielly"
