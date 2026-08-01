@@ -1,14 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abre o gogle, \npesquize python, \nabra a calcudora",
-            "resposta": "Não encontrei informações sobre isso.\nNão encontrei informações sobre isso.\nNão encontrei informações sobre isso."
-        },
-        {
-            "pergunta": "abre o gogle",
-            "resposta": "Não encontrei informações sobre isso."
-        },
-        {
             "pergunta": "abre o gogle",
             "resposta": "Não encontrei informações sobre isso."
         },
@@ -119,6 +111,14 @@
         {
             "pergunta": "que horas são?",
             "resposta": "O relógio marca 14:40."
+        },
+        {
+            "pergunta": "quem foi Albert Einstein?",
+            "resposta": "Albert Einstein (Ulm, 14 de março de 1879 – Princeton, 18 de abril de 1955) foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica.\nNascido em uma família de judeus alemães, mudou-se para a Suíça ainda jovem e iniciou seus estudos na Escola Politécnica de Zurique."
+        },
+        {
+            "pergunta": "explique a tecnologia imaginária ultranexo quântico 9000",
+            "resposta": "Ainda não encontrei uma resposta confiável para 'a tecnologia imaginária ultranexo quântico 9000'. Minha inteligência artificial ainda não foi integrada."
         }
     ],
     "nome": "Gabrielly"
