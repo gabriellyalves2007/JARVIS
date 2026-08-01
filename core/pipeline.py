@@ -3,7 +3,7 @@ from assistente.memoria import salvar_conversa
 from core.contexto import contexto
 from core.executor import executar_plano
 from core.intencoes import identificar_intencao
-from core.router import router
+from core.router import Destino, router
 
 from ia.corretor import corretor
 from ia.planejador import planejador
@@ -11,22 +11,37 @@ from ia.resolvedor import resolvedor
 
 
 class Pipeline:
+    """
+    Coordena todo o fluxo de processamento do JARVIS.
+    """
 
     def antes_processar(
         self,
         texto: str
     ) -> str:
+        """
+        Prepara o texto recebido pela interface.
+        """
+
         return str(texto).strip()
 
     def antes_interpretar(
         self,
         comando: str
     ) -> str:
+        """
+        Corrige o comando e resolve referências
+        relacionadas ao contexto da conversa.
+        """
+
         comando_corrigido = corretor.corrigir(
             comando
         )
 
-        if comando_corrigido.lower() != comando.lower():
+        if (
+            comando_corrigido.lower()
+            != comando.lower()
+        ):
             print(
                 "✏️ Comando corrigido: "
                 f"{comando_corrigido}"
@@ -40,12 +55,21 @@ class Pipeline:
         self,
         plano: dict
     ) -> dict:
+        """
+        Permite validar ou modificar o plano
+        antes de executá-lo.
+        """
+
         return plano
 
     def depois_executar(
         self,
         resposta: str
     ) -> str:
+        """
+        Prepara e valida a resposta final.
+        """
+
         resposta = str(resposta).strip()
 
         if not resposta:
@@ -55,26 +79,39 @@ class Pipeline:
 
     def executar_por_destino(
         self,
-        destino: str,
+        destino: Destino,
         plano: dict
     ) -> str:
         """
-        Encaminha o plano ao componente escolhido pelo Router.
+        Envia o plano para o componente escolhido
+        pelo Router.
         """
 
-        if destino == router.DESTINO_EXECUTOR:
+        if destino == Destino.EXECUTOR:
             return executar_plano(plano)
 
-        if destino == router.DESTINO_MEMORIA:
+        if destino == Destino.MEMORIA:
             return (
-                "O módulo de memória ainda não está "
-                "disponível neste fluxo."
+                "O módulo específico de memória "
+                "ainda não está disponível."
             )
 
-        if destino == router.DESTINO_IA:
+        if destino == Destino.IA:
             return (
                 "O módulo de inteligência artificial "
                 "ainda não foi integrado."
+            )
+
+        if destino == Destino.INTERNET:
+            return (
+                "O módulo específico de internet "
+                "ainda não está disponível."
+            )
+
+        if destino == Destino.PLUGIN:
+            return (
+                "O sistema de plugins ainda não "
+                "foi integrado."
             )
 
         return (
@@ -104,9 +141,13 @@ class Pipeline:
                 texto_original
             )
 
-            if comando.lower() != texto_original.lower():
+            if (
+                comando.lower()
+                != texto_original.lower()
+            ):
                 print(
-                    f"🔗 Comando processado: {comando}"
+                    "🔗 Comando processado: "
+                    f"{comando}"
                 )
 
             intencao_inicial = identificar_intencao(
@@ -124,7 +165,7 @@ class Pipeline:
             )
 
             print(
-                f"🧭 Destino: {destino}"
+                f"🧭 Destino: {destino.value}"
             )
 
             plano = planejador.criar_plano(
@@ -146,10 +187,30 @@ class Pipeline:
             )
 
             for etapa in etapas:
+                numero = etapa.get(
+                    "numero",
+                    "?"
+                )
+
+                intencao_etapa = etapa.get(
+                    "intencao"
+                )
+
+                comando_etapa = etapa.get(
+                    "comando",
+                    ""
+                )
+
+                nome_intencao = (
+                    intencao_etapa.name
+                    if intencao_etapa is not None
+                    else "DESCONHECIDA"
+                )
+
                 print(
-                    f"   {etapa['numero']}. "
-                    f"{etapa['intencao'].name} → "
-                    f"{etapa['comando']}"
+                    f"   {numero}. "
+                    f"{nome_intencao} → "
+                    f"{comando_etapa}"
                 )
 
             resposta = self.executar_por_destino(
@@ -162,7 +223,7 @@ class Pipeline:
             )
 
             ultima_intencao = (
-                etapas[-1]["intencao"]
+                etapas[-1].get("intencao")
                 if etapas
                 else intencao_inicial
             )
@@ -189,7 +250,8 @@ class Pipeline:
 
         except Exception as erro:
             print(
-                f"❌ Erro no Pipeline: {erro}"
+                "❌ Erro no Pipeline: "
+                f"{erro}"
             )
 
             print("==============================\n")

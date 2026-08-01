@@ -1,30 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "abra o Google e pesquise Python",
-            "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google."
-        },
-        {
-            "pergunta": "abra o Google e pesquise Python",
-            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'Python' no Google."
-        },
-        {
-            "pergunta": "abra o Google, depois abra o YouTube",
-            "resposta": "Claro. Abrindo o Google.\nPode aproveitar. Abrindo o YouTube."
-        },
-        {
-            "pergunta": "bra o Google, em seguida pesquise Python e depois abra o YouTube",
-            "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
-        },
-        {
-            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
-            "resposta": "Claro. Abrindo o Google.\nPesquisando por 'Python' no Google.\nAbrindo o YouTube."
-        },
-        {
-            "pergunta": "abra o Google, pesquise Python e abra o YouTube",
-            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'Python' no Google.\nTudo pronto. YouTube iniciado."
-        },
-        {
             "pergunta": "abri o gugou",
             "resposta": "Pode deixar. Abrindo o Google agora."
         },
@@ -119,6 +95,30 @@
         {
             "pergunta": "qual é meu nome?",
             "resposta": "Claro. Seu nome é Gabrielly."
+        },
+        {
+            "pergunta": "abra o Google",
+            "resposta": "Tudo certo. Abrindo o Google."
+        },
+        {
+            "pergunta": "pesquise Python",
+            "resposta": "Pesquisando por 'Python' no Google."
+        },
+        {
+            "pergunta": "que horas são?",
+            "resposta": "Neste momento são 14:32."
+        },
+        {
+            "pergunta": "abra o Google e pesquise inteligência artificial",
+            "resposta": "Pode deixar. Abrindo o Google agora.\nPesquisando por 'inteligência artificial' no Google."
+        },
+        {
+            "pergunta": "qual é meu nome?",
+            "resposta": "Você se chama Gabrielly."
+        },
+        {
+            "pergunta": "repete",
+            "resposta": "Você se chama Gabrielly."
         }
     ],
     "nome": "Gabrielly"

@@ -1,26 +1,35 @@
+from enum import Enum
+
 from core.intencoes import Intencao
+
+
+class Destino(Enum):
+    """
+    Destinos possíveis para o processamento
+    de um comando do JARVIS.
+    """
+
+    EXECUTOR = "executor"
+    MEMORIA = "memoria"
+    IA = "ia"
+    INTERNET = "internet"
+    PLUGIN = "plugin"
+    DESCONHECIDO = "desconhecido"
 
 
 class Router:
     """
-    Decide qual componente deve processar uma intenção.
-
-    Nesta primeira versão, todas as intenções existentes
-    continuam sendo encaminhadas ao executor.
+    Decide qual componente deve processar
+    uma intenção identificada pelo JARVIS.
     """
-
-    DESTINO_EXECUTOR = "executor"
-    DESTINO_IA = "ia"
-    DESTINO_MEMORIA = "memoria"
-    DESTINO_DESCONHECIDO = "desconhecido"
 
     def decidir(
         self,
         intencao: Intencao,
         comando: str
-    ) -> str:
+    ) -> Destino:
         if intencao is None:
-            return self.DESTINO_DESCONHECIDO
+            return Destino.DESCONHECIDO
 
         intencoes_executor = {
             Intencao.ABRIR_GOOGLE,
@@ -34,9 +43,9 @@ class Router:
         }
 
         if intencao in intencoes_executor:
-            return self.DESTINO_EXECUTOR
+            return Destino.EXECUTOR
 
-        return self.DESTINO_DESCONHECIDO
+        return Destino.DESCONHECIDO
 
 
 router = Router()
