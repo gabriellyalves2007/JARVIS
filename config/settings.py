@@ -1,45 +1,40 @@
-from dataclasses import dataclass
+from pathlib import Path
+from config.version import VERSION
 
-
-@dataclass
 class Settings:
     """
     Configurações globais do JARVIS.
+
+    Toda configuração do projeto deverá
+    ficar centralizada nesta classe.
     """
 
-    # ----------------------------
-    # Inteligência Artificial
-    # ----------------------------
+    APP_NAME = "JARVIS"
 
-    IA_PROVIDER: str = "openai"
+    DEBUG = True
 
-    OPENAI_MODEL: str = "gpt-5"
+    ROOT_DIR = Path(__file__).resolve().parent.parent
 
-    GEMINI_MODEL: str = "gemini-2.5-pro"
+    DATA_DIR = ROOT_DIR / "dados"
 
-    OLLAMA_MODEL: str = "llama3.1"
+    LOG_DIR = ROOT_DIR / "logs"
 
-    TEMPERATURE: float = 0.7
+    TEST_DIR = ROOT_DIR / "tests"
 
-    TIMEOUT: int = 60
+    MEMORIA_FILE = DATA_DIR / "memoria.json"
 
-    # ----------------------------
-    # Contexto
-    # ----------------------------
+    WORKSPACE_FILE = (
+        DATA_DIR /
+        "Jarvis.code-workspace"
+    )
 
-    MAX_HISTORICO: int = 10
+    GOOGLE_URL = "https://google.com"
 
-    # ----------------------------
-    # Interface
-    # ----------------------------
+    YOUTUBE_URL = "https://youtube.com"
 
-    TEMA: str = "dark"
-
-    # ----------------------------
-    # Debug
-    # ----------------------------
-
-    DEBUG: bool = True
+    WIKIPEDIA_URL = (
+        "https://pt.wikipedia.org/wiki/"
+    )
 
 
 settings = Settings()

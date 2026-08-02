@@ -1,54 +1,6 @@
 {
     "chat": [
         {
-            "pergunta": "que horas são?",
-            "resposta": "O relógio marca 14:40."
-        },
-        {
-            "pergunta": "quem foi Albert Einstein?",
-            "resposta": "Albert Einstein (Ulm, 14 de março de 1879 – Princeton, 18 de abril de 1955) foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica.\nNascido em uma família de judeus alemães, mudou-se para a Suíça ainda jovem e iniciou seus estudos na Escola Politécnica de Zurique."
-        },
-        {
-            "pergunta": "explique a tecnologia imaginária ultranexo quântico 9000",
-            "resposta": "Ainda não encontrei uma resposta confiável para 'a tecnologia imaginária ultranexo quântico 9000'. Minha inteligência artificial ainda não foi integrada."
-        },
-        {
-            "pergunta": "que horas são?",
-            "resposta": "São exatamente 14:53."
-        },
-        {
-            "pergunta": "abra o Google",
-            "resposta": "Pode deixar. Abrindo o Google agora."
-        },
-        {
-            "pergunta": "abra o YouTube",
-            "resposta": "Abrindo o YouTube."
-        },
-        {
-            "pergunta": "abra a calculadora",
-            "resposta": "Calculadora iniciada."
-        },
-        {
-            "pergunta": "abra o Google e pesquise Python",
-            "resposta": "Tudo certo. Abrindo o Google.\nPesquisando por 'Python' no Google."
-        },
-        {
-            "pergunta": "meu nome é Gabrielly",
-            "resposta": "Prazer em conhecer você. Seu nome é Gabrielly."
-        },
-        {
-            "pergunta": "qual é meu nome?",
-            "resposta": "Claro. Seu nome é Gabrielly."
-        },
-        {
-            "pergunta": "quem foi Albert Einstein?",
-            "resposta": "Albert Einstein (Ulm, 14 de março de 1879 – Princeton, 18 de abril de 1955) foi um físico teórico alemão que desenvolveu a teoria da relatividade geral, um dos pilares da física moderna ao lado da mecânica quântica. Embora mais conhecido por sua fórmula de equivalência massa–energia, E = mc² — que foi chamada de \"a equação mais famosa do mundo\" —, foi laureado com o Prêmio Nobel de Física de 1921 \"por suas contribuições à física teórica\" e, especialmente, por sua descoberta da lei do efeito fotoelétrico, que foi fundamental no estabelecimento da teoria quântica.\nNascido em uma família de judeus alemães, mudou-se para a Suíça ainda jovem e iniciou seus estudos na Escola Politécnica de Zurique."
-        },
-        {
-            "pergunta": "pesquise Albert Einstein",
-            "resposta": "Pesquisando por 'Albert Einstein' no Google."
-        },
-        {
             "pergunta": "abri o gugou",
             "resposta": "Google sendo iniciado."
         },
@@ -119,6 +71,54 @@
         {
             "pergunta": "abra o VS Code e abra o Spotify",
             "resposta": "Abrindo VS Code.\nAbrindo Spotify."
+        },
+        {
+            "pergunta": "programas.fechar(\"spotify\")",
+            "resposta": "Rdio foi um serviço de streaming de músicas extinto em 2015. Permitia escutar músicas pesquisando por artista, álbum ou listas de reprodução criadas pelos usuários. Esteve disponível em sua plataforma online, em aplicativos clientes para sistemas operacionais Microsoft Windows e Mac OS X e em aplicativos para iOS, Android, Windows Phone, BlackBerry e Google Chromecast, que desempenham uma função de cache para reprodução offline."
+        },
+        {
+            "pergunta": "maximize o Word",
+            "resposta": "Microsoft Word foi maximizado."
+        },
+        {
+            "pergunta": "minimize o VS Code",
+            "resposta": "VS Code foi minimizado."
+        },
+        {
+            "pergunta": "restaure o Word",
+            "resposta": "Microsoft Word foi restaurado."
+        },
+        {
+            "pergunta": "traga o WhatsApp para frente",
+            "resposta": "Abrindo WhatsApp."
+        },
+        {
+            "pergunta": "mostre o VS Code em primeiro plano",
+            "resposta": "VS Code foi trazido para primeiro plano."
+        },
+        {
+            "pergunta": "traga o WhatsApp para frente",
+            "resposta": "Abrindo WhatsApp."
+        },
+        {
+            "pergunta": "abra o Chrome",
+            "resposta": "Abrindo Google Chrome."
+        },
+        {
+            "pergunta": "abra o Chrome",
+            "resposta": "Abrindo Google Chrome."
+        },
+        {
+            "pergunta": "feche o Chrome",
+            "resposta": "Google Chrome foi fechado."
+        },
+        {
+            "pergunta": "abra o Spotify",
+            "resposta": "Abrindo Spotify."
+        },
+        {
+            "pergunta": "reinicie o Spotify",
+            "resposta": "Abrindo Spotify."
         }
     ],
     "nome": "Gabrielly"

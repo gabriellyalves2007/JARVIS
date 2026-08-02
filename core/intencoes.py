@@ -1,6 +1,8 @@
 from enum import Enum, auto
 
+from ia.acao_alvo import analisador
 from ia.interpretador import interpretador
+
 from servicos.programas import programas
 
 
@@ -8,6 +10,9 @@ class Intencao(Enum):
     ABRIR_GOOGLE = auto()
     ABRIR_YOUTUBE = auto()
     ABRIR_CALCULADORA = auto()
+
+    # Mantido com este nome por compatibilidade.
+    # Agora também controla programas e janelas.
     ABRIR_PROGRAMA = auto()
 
     INFORMAR_HORAS = auto()
@@ -243,8 +248,47 @@ def identificar_intencao(
     ):
         return Intencao.INFORMAR_HORAS
 
-    # Sites já existentes continuam com suas
-    # intenções específicas.
+    acao_alvo = analisador.analisar(
+        comando
+    )
+
+    if acao_alvo is not None:
+        # Preserva as habilidades específicas
+        # para abrir Google, YouTube e calculadora.
+        if acao_alvo.acao == "abrir":
+            if acao_alvo.alvo in (
+                "google",
+                "o google",
+            ):
+                return Intencao.ABRIR_GOOGLE
+
+            if acao_alvo.alvo in (
+                "youtube",
+                "o youtube",
+            ):
+                return Intencao.ABRIR_YOUTUBE
+
+            if acao_alvo.alvo in (
+                "calculadora",
+                "a calculadora",
+            ):
+                return Intencao.ABRIR_CALCULADORA
+
+        # Ações de janela podem funcionar mesmo
+        # quando o alvo não está no catálogo.
+        if acao_alvo.acao in {
+            "minimizar",
+            "maximizar",
+            "restaurar",
+            "focar",
+        }:
+            return Intencao.ABRIR_PROGRAMA
+
+        if programas.existe(
+            acao_alvo.alvo
+        ):
+            return Intencao.ABRIR_PROGRAMA
+
     if "google" in texto:
         return Intencao.ABRIR_GOOGLE
 
@@ -254,7 +298,6 @@ def identificar_intencao(
     if "calculadora" in texto:
         return Intencao.ABRIR_CALCULADORA
 
-    # Programa genérico.
     if (
         contem_alguma(
             texto,
